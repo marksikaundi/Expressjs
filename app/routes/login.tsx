@@ -25,7 +25,7 @@ export default function Login() {
       <nav className="flex items-center justify-between p-4 w-full">
         <Link to="/" className="flex items-center space-x-2">
           <AppLogo className="h-8 w-8 md:h-10 md:w-10" />
-          <h1 className="text-xl font-semibold">Gitposter</h1>
+          <h1 className="text-xl font-semibold">O1Fast</h1>
         </Link>
         <ThemeToggle />
       </nav>
