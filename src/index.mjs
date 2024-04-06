@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express from "express";
 
 const app = express();
 
@@ -15,6 +15,10 @@ app.get("/api/users", (request, response) => {
   { id: 4, username: "sarah", displayName: "Sarah" }
 ]);
 });
+
+app.get('api/users/:id', (request, response) => {
+    console.log(request.params)
+})
 
 app.get("/api/products", (request, response) => {
     response.send([
