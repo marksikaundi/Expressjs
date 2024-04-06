@@ -16,6 +16,12 @@ app.get("/api/users", (request, response) => {
 ]);
 });
 
+app.get("/api/products", (request, response) => {
+    response.send([
+        {id: "123", name: "Bush Meat", price: "300.99"}
+    ])
+})
+
 app.listen(PORT, () => {
   console.log(`Running on PORT ${PORT}`);
 });
