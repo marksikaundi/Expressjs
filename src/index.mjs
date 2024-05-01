@@ -2,6 +2,18 @@ import express from "express";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const mockUsers = [
+    { id: 1, username: "markikaundi", displayName: "Mark Sikaundi" },
+    { id: 2, username: "joy", displayName: "Joy Dev" },
+    { id: 3, username: "david", displayName: "David Jiri" },
+]
+
+const mockLaptops = [
+    { id: 1, name: "Macbook Pro", price: 2000 },
+    { id: 2, name: "iPhone 12", price: 1000 },
+    { id: 3, name: "Samsung Galaxy S21", price: 800 },
+]
+
 
 // localhost:3000/api/hello-world
 app.get("/api/hello-world", (req, res) => {
@@ -15,31 +27,17 @@ app.get("/api", (req, res) => {
 
 // localhost:3000/users
 app.get("/api/users", (req, res) => {
-  res.send([
-    { id: 1, username: "markikaundi", displayName: "Mark Sikaundi" },
-    { id: 2, username: "joy", displayName: "Joy Dev" },
-    { id: 3, username: "david", displayName: "David Jiri" },
-  ]);
+  res.send(mockUsers);
 });
 
 app.get("/api/users/:id", (req, res) => {
-    console.log(req.params);
+  console.log(req.params);
 });
-
-
-
-
 
 // localhost:3000/api/laptops
 app.get("/api/laptops", (req, res) => {
-  res.send([
-    { id: 110, name: "Macbook Pro", price: 2000 },
-    { id: 111, name: "iPhone 12", price: 1000 },
-    { id: 112, name: "Samsung Galaxy S21", price: 800 },
-  ]);
-}
-);
-
+  res.send(mockLaptops);
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
