@@ -3,6 +3,10 @@ import express from 'express';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.get('/hello-world', (req, res) => {
+    res.send('Hello, from Lupleg Community');
+
+})
 
 app.get('/', (req, res) => {
     res.send('Hello World');
