@@ -40,6 +40,7 @@ app.get("/api/users", (req, res) => {
   if (filter && value) {
     return res.send(mockUsers.filter((user) => user[filter].includes(value)));
   }
+  return res.send(mockUsers);
 });
 
 // localhost:3000/api/users/id
