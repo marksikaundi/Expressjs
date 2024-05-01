@@ -8,8 +8,8 @@ app.get("/api/hello-world", (req, res) => {
   res.send("Hello, from Lupleg Community");
 });
 
-// localhost:3000
-app.get("/", (req, res) => {
+// localhost:3000/api
+app.get("/api", (req, res) => {
   res.send("Hello World");
 });
 
@@ -21,6 +21,14 @@ app.get("/api/users", (req, res) => {
     { id: 3, username: "david", displayName: "David Jiri" },
   ]);
 });
+
+app.get("/api/users/:id", (req, res) => {
+    console.log(req.params);
+});
+
+
+
+
 
 // localhost:3000/api/laptops
 app.get("/api/laptops", (req, res) => {
