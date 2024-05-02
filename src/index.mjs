@@ -47,7 +47,7 @@ app.get("/api/users", (req, res) => {
 
 app.post("/api/users", (req, res) => {
   const { body } = req;
-  const newUser = {  id: mockUsers[mockUsers.length - 1] .id + 1, ...body};
+  const newUser = { id: mockUsers[mockUsers.length - 1].id + 1, ...body };
   mockUsers.push(newUser);
   return res.status(200).send(newUser);
 });
@@ -74,7 +74,23 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// localhost:3000
-// localhost:3000/users
-// localhost:3000/users/1
-// localhost:3000/products
+// PUT
+app.put("/api/users/:id", (req, res) => {
+  const {
+    body,
+    params: { id },
+  } = req;
+  const parsedId = parseInt(id);
+  if (isNaN(parsedId)) return res.sendStatus(400);
+
+  const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
+
+  if (findUserIndex === -1) return res.sendStatus(404);
+
+  mockUsers[findUserIndex] = { id: parsedId, ...body };
+  return res.sendStatus(200);
+});
+
+// PATCH
+
+// DELETE
