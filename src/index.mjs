@@ -1,7 +1,9 @@
 import express from "express";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(express.json());
+
+const PORT = process.env.PORT || 8000;
 const mockUsers = [
   { id: 1, username: "markikaundi", displayName: "Mark Sikaundi" },
   { id: 2, username: "joy", displayName: "Joy Dev" },
@@ -41,6 +43,11 @@ app.get("/api/users", (req, res) => {
     return res.send(mockUsers.filter((user) => user[filter].includes(value)));
   }
   return res.send(mockUsers);
+});
+
+app.post("/api/users", (req, res) => {
+  console.log(req.body);
+  res.send("User created successfully");
 });
 
 // localhost:3000/api/users/id
