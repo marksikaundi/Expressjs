@@ -46,8 +46,10 @@ app.get("/api/users", (req, res) => {
 });
 
 app.post("/api/users", (req, res) => {
-  console.log(req.body);
-  res.send("User created successfully");
+  const { body } = req;
+  const newUser = {  id: mockUsers[mockUsers.length - 1] .id + 1, ...body};
+  mockUsers.push(newUser);
+  return res.status(200).send(newUser);
 });
 
 // localhost:3000/api/users/id
