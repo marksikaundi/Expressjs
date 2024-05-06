@@ -3,6 +3,14 @@ import express from "express";
 const app = express();
 app.use(express.json());
 
+const loggingMiddleware = (req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+
+}
+
+// app.use(loggingMiddleware);
+
 const PORT = process.env.PORT || 8000;
 const mockUsers = [
   { id: 1, username: "markikaundi", displayName: "Mark Sikaundi" },
@@ -25,7 +33,7 @@ app.get("/api/hello-world", (req, res) => {
 });
 
 // localhost:3000/api
-app.get("/api", (req, res) => {
+app.get("/api", loggingMiddleware, (req, res) => {
   res.send("Hello World");
 });
 
