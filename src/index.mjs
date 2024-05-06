@@ -6,8 +6,7 @@ app.use(express.json());
 const loggingMiddleware = (req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
-
-}
+};
 
 // app.use(loggingMiddleware);
 
@@ -118,7 +117,7 @@ app.patch("/api/users/:id", (req, res) => {
 app.delete("/api/users/:id", (req, res) => {
   const {
     params: { id },
-   } = req;
+  } = req;
   const parsedId = parseInt(id);
   if (isNaN(parsedId)) return res.sendStatus(400);
   const findUserIndex = mockUsers.findIndex((users) => user.id === parsedId);
