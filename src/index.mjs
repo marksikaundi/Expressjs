@@ -78,7 +78,7 @@ app.get("/api/users/:id", (req, res) => {
   const parsedId = parseInt(req.params.id);
   console.log(parsedId);
   if (isNaN(parsedId))
-    return res.status(400).send({ msg: "Bad Requesr. Invalid ID" });
+    return res.status(400).send({ msg: "Bad Request. Invalid ID" });
 
   const findUser = mockUsers.find((user) => user.id === parsedId);
   if (!findUser) return res.status(404);
@@ -103,29 +103,22 @@ app.put("/api/users/:id", resolveIndexByUserId, (req, res) => {
 });
 
 // PATCH
-app.patch("/api/users/:id", (req, res) => {
+app.patch("/api/users/:id", resolveIndexByUserId, (req, res) => {
   const {
     body,
-    params: { id },
+    findUserIndex
   } = req;
-  const parsedId = parseInt(id);
-  if (isNaN(parsedId)) return res.sendStatus(400);
-
-  const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
-  if (findUserIndex === -1) return res.sendStatus(404);
+  
   mockUsers[findUserIndex] = { ...mockUsers[findUserIndex], ...body };
   return res.sendStatus(200);
 });
 
 // DELETE
-app.delete("/api/users/:id", (req, res) => {
+app.delete("/api/users/:id", resolveIndexByUserId, (req, res) => {
   const {
-    params: { id },
+    findUserIndex
   } = req;
-  const parsedId = parseInt(id);
-  if (isNaN(parsedId)) return res.sendStatus(400);
-  const findUserIndex = mockUsers.findIndex((users) => user.id === parsedId);
-  if (findUserIndex === -1) return res.sendStatus(404);
+  
   mockUsers.splice(findUserIndex);
   return res.sendStatus(200);
 });
