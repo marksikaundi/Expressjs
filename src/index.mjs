@@ -73,14 +73,9 @@ app.post("/api/users", (req, res) => {
 });
 
 // localhost:3000/api/users/id
-app.get("/api/users/:id", (req, res) => {
-  console.log(req.params);
-  const parsedId = parseInt(req.params.id);
-  console.log(parsedId);
-  if (isNaN(parsedId))
-    return res.status(400).send({ msg: "Bad Request. Invalid ID" });
-
-  const findUser = mockUsers.find((user) => user.id === parsedId);
+app.get("/api/users/:id", resolveIndexByUserId, (req, res) => {
+  const { findUserIndex } = req;
+  const findUser = mockUsers[findUserIndex];
   if (!findUser) return res.status(404);
   return res.send(findUser);
 });
@@ -104,21 +99,16 @@ app.put("/api/users/:id", resolveIndexByUserId, (req, res) => {
 
 // PATCH
 app.patch("/api/users/:id", resolveIndexByUserId, (req, res) => {
-  const {
-    body,
-    findUserIndex
-  } = req;
-  
+  const { body, findUserIndex } = req;
+
   mockUsers[findUserIndex] = { ...mockUsers[findUserIndex], ...body };
   return res.sendStatus(200);
 });
 
 // DELETE
 app.delete("/api/users/:id", resolveIndexByUserId, (req, res) => {
-  const {
-    findUserIndex
-  } = req;
-  
+  const { findUserIndex } = req;
+
   mockUsers.splice(findUserIndex);
   return res.sendStatus(200);
 });
